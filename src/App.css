@@ -117,7 +117,7 @@
   /* border: 1px solid white; */
   color: white;
 }
-img{
+.home img{
   height: 420px;
   border-radius: 218px;
   width :400px;
@@ -206,4 +206,13 @@ img{
   text-align: center;
   /* height: 100%; */
 }
-
+.d-flex .btn{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.d-flex img{
+  height: 40px;
+  width: auto;
+}

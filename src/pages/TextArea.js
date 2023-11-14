@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar1 from '../components/Navbar1';
 import SideList from '../components/SideList';
 const TextArea = () => {
   return (
     <div class="textarea overflow-hidden">
-      <Navbar />
+      <Navbar1/>
       <div className='Text'>
         <SideList/>
         <div className="mb-3">
