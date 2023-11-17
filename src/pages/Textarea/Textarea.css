@@ -1,0 +1,22 @@
+.mb-3 {
+  margin-top: 50px;
+  margin-left: 150px;
+  width: 60%;
+  height: 250px;
+  justify-content: center;
+  align-items: center;
+}
+#reset {
+  position: absolute;
+  left: 50%;
+  margin-top: 40px;
+}
+.form-control {
+  height: 250px;
+  border: 2px solid black;
+}
+.Text {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}

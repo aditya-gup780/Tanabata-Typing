@@ -35,7 +35,7 @@ function Signup() {
           </i>
           <input type="text" placeholder="Email" />{" "}
         </div>
-        <input type="submit" value="Sign up" class="btn" />
+        <input type="submit" value="Sign up" class="btn2" />
         <p className="social-text">Or Sign Up With Social Platform</p>
         <div className="social-media">
           <a href="#" className="social-icon">

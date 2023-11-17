@@ -1,0 +1,44 @@
+.show-on-scroll2 {
+  view-timeline-name: --subjectReveal;
+  animation-timeline: --subjectReveal;
+
+  animation-name: appear2;
+  animation-fill-mode: both;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+}
+
+@keyframes appear2 {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.mid {
+  margin: 60px 60px 60px 60px;
+
+  display: flex;
+}
+
+.text2 {
+  /* border: 2px solid white; */
+  width: 100%;
+  padding: 10% 7%;
+  padding-left: 40px;
+}
+.text2 h3 {
+  font-size: 30px;
+  color: white;
+  /* left: 500px;
+    bottom: 500px; */
+  /* border: 1px solid red; */
+  width: 100%;
+}
+.text2 p {
+  /* border: 1px solid white; */
+  color: white;
+}

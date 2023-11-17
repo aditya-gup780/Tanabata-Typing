@@ -43,7 +43,7 @@ form {
   font-weight: 600;
   color: #444;
 }
-.btn {
+.btn2 {
   width: 150px;
   height: 50px;
   border: none;
@@ -55,7 +55,7 @@ form {
   text-transform: uppercase;
   cursor: pointer;
 }
-.btn:hover {
+.btn2:hover {
   background: purple;
 }
 .social-text {

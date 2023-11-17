@@ -1,0 +1,27 @@
+#side-list {
+  border: 1px solid black;
+  background-color: rgb(250, 248, 246);
+  height: 100vh;
+}
+.list-group-item {
+  width: 220px;
+  padding: 20px 0;
+  text-align: center;
+  /* height: 100%; */
+}
+.btn5 {
+  margin-top: 5px;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgb(43, 86, 226);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn5:hover {
+  background: purple;
+}

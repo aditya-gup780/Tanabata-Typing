@@ -1,9 +1,9 @@
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import TextArea from "./pages/TextArea";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
+import TextArea from "./pages/Textarea/Textarea";
+import Home from "./pages/Home/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Loginsignup from "./pages/loginsignup/loginsignup";
 // import loop from './components/ScrollEffect'
 

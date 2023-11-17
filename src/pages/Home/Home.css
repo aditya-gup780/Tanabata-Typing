@@ -1,0 +1,13 @@
+.home {
+  background-image: url("https://images.ctfassets.net/p0qf7j048i0q/Ye7XLtAQbu92riigoreTz/300f1f0104786bc5eda435cf8bf4e3e1/G1352603244.png?w=3840&q=75&h=3840&fm=webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.home img {
+  height: 420px;
+  border-radius: 218px;
+  width: 400px;
+  /* transform: translateY(4em) rotateZ(-5deg);
+    transition: transform 4s .25s cubic-bezier(0,1,.3,1), opacity .3s .25s ease-out;
+    will-change: transform, opacity;             */
+}
