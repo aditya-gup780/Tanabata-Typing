@@ -1,6 +1,6 @@
 import React from "react";
 import "./Top.css";
-import typing1 from "../images/typing1.jpeg";
+import typing1 from "../images/typing.jpeg";
 export default function Top() {
   return (
     <div className="top">
