@@ -18,7 +18,7 @@ function Loginsignup() {
   return (
     <div className="back">
       <button type="button" className="btn5">
-        <Link to="/" className="btn6">
+        <Link to="/Tanabata-Typing" className="btn6">
           Back
         </Link>
       </button>

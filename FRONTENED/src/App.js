@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home></Home>} />
+          <Route exact path="/Tanabata-Typing" element={<Home></Home>} />
         </Routes>
         <Routes>
           <Route exact path="/textarea" element={<TextArea></TextArea>} />
