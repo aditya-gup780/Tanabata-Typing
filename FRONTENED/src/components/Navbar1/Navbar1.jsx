@@ -13,7 +13,7 @@ export default function Navbar1() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <form className="d-flex" role="search">
             <button id="practice" className="btn3" type="submit">
-              <Link to="/Dashboard" className="btn3">
+              <Link to="/dashboard" className="btn3">
                 {" "}
                 Practice Now!
               </Link>
