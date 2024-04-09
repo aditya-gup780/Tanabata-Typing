@@ -145,8 +145,8 @@ app.get('/leaderboard/daily/:date', async (req, res) => {
 
     // Sort the leaderboard by score in descending order
     dailyLeaderboard.sort((a, b) => b.score - a.score);
-
-    res.json(dailyLeaderboard);
+    const top10DailyLeaderboard=dailyLeaderboard.slice(0, 10);
+    res.json(top10DailyLeaderboard);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -172,9 +172,8 @@ app.get('/leaderboard/weekly/:date', async (req, res) => {
 
     // Sort the leaderboard by score in descending order
     weeklyLeaderboard.sort((a, b) => b.score - a.score);
-
-    res.json(weeklyLeaderboard);
-    console.log(weeklyLeaderboard);
+    const top10WeeklyLeaderboard = weeklyLeaderboard.slice(0, 10);
+    res.json(top10WeeklyLeaderboard);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -196,7 +195,6 @@ app.get('/leaderboard/all-time', async (req, res) => {
     const top10AllTimeLeaderboard = allTimeLeaderboard.slice(0, 10);
 
     res.json(top10AllTimeLeaderboard);
-    console.log(top10AllTimeLeaderboard);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
