@@ -1,7 +1,13 @@
 .home {
   background-image: url("https://images.ctfassets.net/p0qf7j048i0q/Ye7XLtAQbu92riigoreTz/300f1f0104786bc5eda435cf8bf4e3e1/G1352603244.png?w=3840&q=75&h=3840&fm=webp");
   background-repeat: no-repeat;
+  width: 100%;
+  /*height: 100vh;*/
+  background-attachment: fixed;
   background-size: cover;
+  background-position: center;
+  margin:0;
+  padding: 0;
 }
 .home img {
   height: 420px;
