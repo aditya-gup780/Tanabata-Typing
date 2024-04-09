@@ -20,17 +20,18 @@ function Login1() {
 
   async function submit(e){
       e.preventDefault();
-
+      console.log("Details submitted");
       try{
 
           await axios.post("http://localhost:5000/login",{
               email,password
           })
           .then(res=>{
-              if(res.data=="exist"){
-                  history("/",{state:{id:email}})
+              if(res.data==="exist"){
+                alert("Login Successful")
+                  history("/")
               }
-              else if(res.data=="notexist"){
+              else if(res.data==="notexist"){
                   alert("User have not sign up")
               }
           })

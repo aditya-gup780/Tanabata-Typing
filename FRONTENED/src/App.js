@@ -5,6 +5,7 @@ import TextArea from "./pages/Textarea/Textarea";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Loginsignup from "./pages/loginsignup/loginsignup";
+import LeaderBoard from "./components/Leaderboard";
 // import loop from './components/ScrollEffect'
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
             path="/Loginsignup"
             element={<Loginsignup></Loginsignup>}
           />
+        </Routes>
+        <Routes>
+          <Route exact path="/leaderboard" element={<LeaderBoard></LeaderBoard>} />
         </Routes>
       </Router>
     </div>

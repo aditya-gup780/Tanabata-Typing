@@ -39,12 +39,3 @@ const leaderboardSchema = new mongoose.Schema({
   const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
   
   module.exports = Leaderboard;
-
-
-
-        /*console.log('sent successfully',response.data);
-      const token =response.data.token;
-      localStorage.setItem('token',token);
-      localStorage.setItem('username',)
-      navigat('/');
-      */

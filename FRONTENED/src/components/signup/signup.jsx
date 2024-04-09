@@ -16,7 +16,7 @@ import Login1 from "../login/login";
 function Signup() {
   const history=useNavigate();
 
-  const [username,setUsername]=useState('');
+  const [name,setUsername]=useState('');
   const [password,setPassword]=useState('');
   const [email,setEmail]=useState('');
 
@@ -24,16 +24,16 @@ function Signup() {
     e.preventDefault();
 
     try {
-      console.log('Data to be sent:', { username, password, email });
+      console.log('Data to be sent:', { name, password, email });
       const response = await axios.post('http://localhost:5000/signup', {
-        username,
+        name,
         password,
         email,
       })
       if (response.data.email === 'exist') {
         alert('User already exists');
       } else {
-        history('/', { state: { id: email } });
+        history('/dashboard');
       }
     } catch (error) {
       alert('Error: Unable to sign up');

@@ -1,5 +1,4 @@
 const express=require('express');
-const passport=require('passport');
 const app=express();
 const cors = require('cors');
 const path = require('path');
@@ -62,8 +61,8 @@ app.post("/signup", async (request, response) => {
       if (!user) {
         return res.status(404).json({ error: "User Not found" });
       }
-      const hashedPassword = await bcrypt.hash(user.password, 10);
-      const passwordMatch = await bcrypt.compare(password, hashedPassword);
+   
+      const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) { 
         return res.status(401).json({ error: "Invalid Password" });
       }
@@ -152,56 +151,64 @@ app.get('/leaderboard/daily/:date', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-//Weekly Leaderboard
+// Weekly
 app.get('/leaderboard/weekly/:date', async (req, res) => {
   try {
     const { date } = req.params; 
     const startOfWeek = new Date(date);
     startOfWeek.setUTCHours(0, 0, 0, 0);
-    startOfWeek.setDate(selectedDate.getDate() - selectedDate.getDay()); // Start of the week (Sunday)
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); // Start of the week (Sunday)
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(startOfWeek.getDate() + 6); // End of the week (Saturday)
 
     const users = await Leaderboard.find({});
 
-    // Filter the scores for each user based on the week
+    // Construct the weekly leaderboard with user names
     const weeklyLeaderboard = users.map(user => {
       const weeklyScores = user.scores.filter(score => score.date >= startOfWeek && score.date <= endOfWeek);
-      return { username: user.username, score: Math.max(...weeklyScores.map(score => score.score), 0) };
+      const maxScore = Math.max(...weeklyScores.map(score => score.score), 0);
+      return { username: user.username, score: maxScore };
     });
 
     // Sort the leaderboard by score in descending order
     weeklyLeaderboard.sort((a, b) => b.score - a.score);
 
     res.json(weeklyLeaderboard);
+    console.log(weeklyLeaderboard);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.get('/leaderboard/all-time', async (req, res) => {
+  try {
+    const users = await Leaderboard.find({});
+    
+    // Construct the all-time leaderboard with user names and their maximum scores
+    const allTimeLeaderboard = users.map(user => {
+      const maxScore = Math.max(...user.scores.map(score => score.score), 0);
+      return { username: user.username, score: maxScore };
+    });
+
+    // Sort the leaderboard by score in descending order
+    allTimeLeaderboard.sort((a, b) => b.score - a.score);
+
+    // Limit the results to the top 10 users with the highest scores
+    const top10AllTimeLeaderboard = allTimeLeaderboard.slice(0, 10);
+
+    res.json(top10AllTimeLeaderboard);
+    console.log(top10AllTimeLeaderboard);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-app.get('/leaderboard/all-time', async (req, res) => {
+app.get('/api/leaderboard', async (req, res) => {
   try {
-    const allTimeLeaderboard = await Leaderboard.aggregate([
-      {
-        $match: { leaderboardType: 'all-time' }
-      },
-      {
-        $group: {
-          _id: '$username',
-          maxScore: { $max: '$score' }
-        }
-      },
-      {
-        $sort: { maxScore: -1 }
-      },
-      {
-        $limit: 10 // Limit the results to the top 10 users with the highest scores
-      }
-    ]);
-
-    res.json(allTimeLeaderboard);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+      const leaderboard = await Leaderboard.find().sort({ score: -1 }).limit(10);
+      res.json(leaderboard);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
   }
 });
 
