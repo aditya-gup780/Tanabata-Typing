@@ -5,8 +5,8 @@ import "./Textarea.css";
 
 const TextArea = () => {
   let TIME_LIMIT = 60;
-  const [cpm,setCpm] = useState(1);
-  const [wpm,setWpm] = useState(1);
+  const [cpm, setCpm] = useState(1);
+  const [wpm, setWpm] = useState(1);
   // define quotes to be used
   let quotes_array = [
     "Push yourself, because no one else is going to do it for you.",
@@ -83,116 +83,99 @@ const TextArea = () => {
         char.classList.remove("correct_char");
         errors++;
       }
-    }); 
-  
-    
-  
-    // display the number of errors 
-  
-    errorTextRef.current.textContent = total_errors + errors; 
-  
-    
-  
-    // update accuracy text 
-  
-    let correctCharacters = (characterTyped - (total_errors + errors)); 
-  
-    let accuracyVal = ((correctCharacters / characterTyped) * 100); 
-  
-    accuracyTextRef.current.textContent = Math.round(accuracyVal); 
-  
-    
-  
-    // if current text is completely typed 
-  
-    // irrespective of errors 
-  
-    if (curr_input.length === current_quote.length) { 
-  
-      updateQuote(); 
-  
-    
-  
-      // update total errors 
-  
-      total_errors += errors; 
-  
-    
-  
-      // clear the input area 
-  
-      formControlRef.current.value = ""; 
-  
-    } 
+    });
+
+    // display the number of errors
+
+    errorTextRef.current.textContent = total_errors + errors;
+
+    // update accuracy text
+
+    let correctCharacters = characterTyped - (total_errors + errors);
+
+    let accuracyVal = (correctCharacters / characterTyped) * 100;
+
+    accuracyTextRef.current.textContent = Math.round(accuracyVal);
+
+    // if current text is completely typed
+
+    // irrespective of errors
+
+    if (curr_input.length === current_quote.length) {
+      updateQuote();
+
+      // update total errors
+
+      total_errors += errors;
+
+      // clear the input area
+
+      formControlRef.current.value = "";
+    }
   }
 
-  function startGame() { 
+  function startGame() {
+    resetValues();
 
-  
+    updateQuote();
 
-    resetValues(); 
-  
-    updateQuote(); 
-  
-    
-  
-    // clear old and start a new timer 
-  
-    clearInterval(timer); 
-  
-    timer = setInterval(updateTimer, 1000); 
-  } 
-  
-    
-  
-  function resetValues() { 
-  
-    timeLeft = TIME_LIMIT; 
-  
-    timeElapsed = 0; 
-  
-    errors = 0; 
-  
-    total_errors = 0; 
-  
-    accuracy = 0; 
-  
-    characterTyped = 0; 
-  
-    quoteNo = 0; 
-  
+    // clear old and start a new timer
+
+    clearInterval(timer);
+
+    timer = setInterval(updateTimer, 1000);
+    restartBtnRef.current.style.display = "block";
+  }
+
+  function resetValues() {
+    timeLeft = TIME_LIMIT;
+
+    timeElapsed = 0;
+
+    errors = 0;
+
+    total_errors = 0;
+
+    accuracy = 0;
+
+    characterTyped = 0;
+
+    quoteNo = 0;
+
     if (formControlRef.current) {
       formControlRef.current.disabled = false;
       formControlRef.current.value = "";
     }
-  
+
     if (quoteTextRef.current) {
-      quoteTextRef.current.textContent = 'Click on the area below to start the game.';
+      quoteTextRef.current.textContent =
+        "Click on the area below to start the game.";
     }
-  
+
     if (accuracyTextRef.current) {
       accuracyTextRef.current.textContent = 100;
     }
-  
+
     if (timerTextRef.current) {
       timerTextRef.current.textContent = `${timeLeft}s`;
     }
-  
+
     if (errorTextRef.current) {
       errorTextRef.current.textContent = 0;
     }
-  
+
     if (restartBtnRef.current) {
       restartBtnRef.current.style.display = "none";
     }
-  
+
     if (cpmGroupRef.current) {
       cpmGroupRef.current.style.display = "none";
     }
-  
+
     if (wpmGroupRef.current) {
       wpmGroupRef.current.style.display = "none";
     }
+    clearInterval(timer);
   }
   function updateTimer() {
     if (timeLeft > 0) {
@@ -206,39 +189,40 @@ const TextArea = () => {
   function finishGame() {
     clearInterval(timer);
 
-  if (formControlRef.current) {
-    formControlRef.current.disabled = true;
-  }
+    if (formControlRef.current) {
+      formControlRef.current.disabled = true;
+    }
 
-  if (quoteTextRef.current) {
-    quoteTextRef.current.textContent = "Click on restart to start a new game.";
-  }
+    if (quoteTextRef.current) {
+      quoteTextRef.current.textContent =
+        "Click on restart to start a new game.";
+    }
 
-  if (restartBtnRef.current) {
-    restartBtnRef.current.style.display = "block";
-  }
-
-  if (cpmGroupRef.current && wpmGroupRef.current) {
-    console.log('characterTyped:', characterTyped);
-    console.log('timeElapsed:', timeElapsed);
-    const newCpm = Math.round((characterTyped / timeElapsed) * 60);
-    console.log('newCpm: ',newCpm);
-    setCpm((prevCpm) => newCpm);
-
-    const newWpm = Math.round(((characterTyped / 5) / timeElapsed) * 60);
-    console.log('newWpm:', newWpm);
-    setWpm((prevWpm) => newWpm);
-
-    if (cpmTextRef.current && wpmTextRef.current) {
-      cpmTextRef.current.textContent = cpm;
-      wpmTextRef.current.textContent = wpm;
+    if (restartBtnRef.current) {
+      restartBtnRef.current.style.display = "block";
     }
 
     if (cpmGroupRef.current && wpmGroupRef.current) {
-      cpmGroupRef.current.style.display = "block";
-      wpmGroupRef.current.style.display = "block";
+      console.log("characterTyped:", characterTyped);
+      console.log("timeElapsed:", timeElapsed);
+      const newCpm = Math.round((characterTyped / timeElapsed) * 60);
+      console.log("newCpm: ", newCpm);
+      setCpm((prevCpm) => newCpm);
+
+      const newWpm = Math.round((characterTyped / 5 / timeElapsed) * 60);
+      console.log("newWpm:", newWpm);
+      setWpm((prevWpm) => newWpm);
+
+      if (cpmTextRef.current && wpmTextRef.current) {
+        cpmTextRef.current.textContent = cpm;
+        wpmTextRef.current.textContent = wpm;
+      }
+
+      if (cpmGroupRef.current && wpmGroupRef.current) {
+        cpmGroupRef.current.style.display = "block";
+        wpmGroupRef.current.style.display = "block";
+      }
     }
-  }
   }
   return (
     <div className="textarea overflow-hidden">
@@ -247,36 +231,48 @@ const TextArea = () => {
         <SideList />
         <div className="mb-3">
           <div className="header">
-          <div className="wpm">
-  <div className="header_text">WPM</div>
-  <div ref={wpmTextRef} className="curr_wpm">0</div>
-</div>
+            <div className="wpm">
+              <div className="header_text">WPM</div>
+              <div ref={wpmTextRef} className="curr_wpm">
+                0
+              </div>
+            </div>
 
             <div className="cpm">
               <div className="header_text">CPM</div>
 
-              <div ref={cpmTextRef} className="curr_cpm">0</div>
+              <div ref={cpmTextRef} className="curr_cpm">
+                0
+              </div>
             </div>
 
             <div className="errors">
               <div className="header_text">Errors</div>
 
-              <div ref={errorTextRef} className="curr_errors">0</div>
+              <div ref={errorTextRef} className="curr_errors">
+                0
+              </div>
             </div>
 
             <div className="timer">
               <div className="header_text">Time</div>
 
-              <div ref={timerTextRef} className="curr_time">60s</div>
+              <div ref={timerTextRef} className="curr_time">
+                60s
+              </div>
             </div>
 
             <div className="accuracy">
               <div className="header_text">% Accuracy</div>
 
-              <div ref={accuracyTextRef} className="curr_accuracy">100</div>
+              <div ref={accuracyTextRef} className="curr_accuracy">
+                100
+              </div>
             </div>
           </div>
-          <div ref={quoteTextRef} className="quote">Click on the area below to start the game.</div>
+          <div ref={quoteTextRef} className="quote">
+            Click on the area below to start the game.
+          </div>
           <textarea
             data-bs-spy="scroll"
             className="form-control combined-textarea"
