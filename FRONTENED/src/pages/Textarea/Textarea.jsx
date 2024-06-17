@@ -5,8 +5,8 @@ import "./Textarea.css";
 
 const TextArea = () => {
   let TIME_LIMIT = 60;
-  const [cpm, setCpm] = useState(1);
-  const [wpm, setWpm] = useState(1);
+  const [cpm, setCpm] = useState(0);
+  const [wpm, setWpm] = useState(0);
   // define quotes to be used
   let quotes_array = [
     "Push yourself, because no one else is going to do it for you.",
@@ -168,12 +168,12 @@ const TextArea = () => {
       restartBtnRef.current.style.display = "none";
     }
 
-    if (cpmGroupRef.current) {
-      cpmGroupRef.current.style.display = "none";
+    if (cpmTextRef.current) {
+      cpmTextRef.current.textContent = 0;
     }
 
-    if (wpmGroupRef.current) {
-      wpmGroupRef.current.style.display = "none";
+    if (wpmTextRef.current) {
+      wpmTextRef.current.textContent = 0;
     }
     clearInterval(timer);
   }
@@ -202,27 +202,17 @@ const TextArea = () => {
       restartBtnRef.current.style.display = "block";
     }
 
-    if (cpmGroupRef.current && wpmGroupRef.current) {
-      console.log("characterTyped:", characterTyped);
-      console.log("timeElapsed:", timeElapsed);
-      const newCpm = Math.round((characterTyped / timeElapsed) * 60);
-      console.log("newCpm: ", newCpm);
-      setCpm((prevCpm) => newCpm);
+    const newCpm = Math.round((characterTyped / timeElapsed) * 60);
+    const newWpm = Math.round((characterTyped / 5 / timeElapsed) * 60);
 
-      const newWpm = Math.round((characterTyped / 5 / timeElapsed) * 60);
-      console.log("newWpm:", newWpm);
-      setWpm((prevWpm) => newWpm);
+    setCpm(newCpm);
+    setWpm(newWpm);
 
-      if (cpmTextRef.current && wpmTextRef.current) {
-        cpmTextRef.current.textContent = cpm;
-        wpmTextRef.current.textContent = wpm;
-      }
-
-      if (cpmGroupRef.current && wpmGroupRef.current) {
-        cpmGroupRef.current.style.display = "block";
-        wpmGroupRef.current.style.display = "block";
-      }
+    if (cpmTextRef.current && wpmTextRef.current) {
+      cpmTextRef.current.textContent = newCpm;
+      wpmTextRef.current.textContent = newWpm;
     }
+
   }
   return (
     <div className="textarea overflow-hidden">
