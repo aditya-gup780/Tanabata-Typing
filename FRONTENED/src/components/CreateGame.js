@@ -30,3 +30,4 @@ const CreateGame = props => {
     </div>
   )
 }
+export default CreateGame;
