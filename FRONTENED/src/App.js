@@ -9,6 +9,7 @@ import LeaderBoard from "./components/Leaderboard";
 import CreateGame from "./components/CreateGame";
 import JoinGame from "./components/JoinGame";
 import socket from './socketConfig';
+import Arena from './components/Arena';
 // import loop from './components/ScrollEffect'
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
           <Route exact path="/game/join" element={<JoinGame></JoinGame>} />
         </Routes>
         <Routes>
-          <Route exact path="/game/:gameID" render={props => <TextArea {...props} gameState={gameState}>} />
+          <Route exact path="/game/:gameID" render={props => <Arena {...props} gameState={gameState}>} />
         </Routes>
         <Routes>
           <Route
