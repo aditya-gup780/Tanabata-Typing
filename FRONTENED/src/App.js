@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Loginsignup from "./pages/loginsignup/loginsignup";
 import LeaderBoard from "./components/Leaderboard";
 import CreateGame from "./components/CreateGame";
+import JoinGame from "./components/JoinGame";
 import socket from './socketConfig';
 // import loop from './components/ScrollEffect'
 
@@ -43,6 +44,9 @@ function App() {
         </Routes>
         <Routes>
           <Route exact path="/game/create" element={<CreateGame></CreateGame>} />
+        </Routes>
+        <Routes>
+          <Route exact path="/game/join" element={<JoinGame></JoinGame>} />
         </Routes>
         <Routes>
           <Route
