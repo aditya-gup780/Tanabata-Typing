@@ -49,6 +49,9 @@ function App() {
           <Route exact path="/game/join" element={<JoinGame></JoinGame>} />
         </Routes>
         <Routes>
+          <Route exact path="/game/:gameID" render={props => <TextArea {...props} gameState={gameState}>} />
+        </Routes>
+        <Routes>
           <Route
             exact
             path="/Loginsignup"
