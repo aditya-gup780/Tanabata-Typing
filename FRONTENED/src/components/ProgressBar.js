@@ -23,11 +23,11 @@ const ProgressBar = ({player,players,wordsLength})=>{
       }
       {
         players.map(playerObj=>{
-          const percentage = calculatePercentage(player,wordsLength);
+          const percentage = calculatePercentage(playerObj,wordsLength);
           return playerObj._id !== player._id ? 
             <>
-              <h5 className="text-left">{player.nickName}</h5>
-              <div className="progress my-1" key={player._id}>
+              <h5 className="text-left">{playerObj.nickName}</h5>
+              <div className="progress my-1" key={playerObj._id}>
                 <div className="progress-bar" role="progressbar" style={{width : percentage}}>
                   {percentage}
                 </div>
