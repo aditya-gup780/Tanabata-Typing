@@ -17,10 +17,14 @@ There are various features in our project. Some of them are completed and we are
 
 
 ## Images
-   Some images from the site are:-
+   Some images and video from the site are:-
    ![Screenshot 2024-07-15 205902](https://github.com/user-attachments/assets/c7c22525-a0c3-4759-97f0-56e6004eb69e)
    ![Screenshot 2024-07-15 205936](https://github.com/user-attachments/assets/3e464329-08ba-4f45-9aed-e38249594f8f)
    ![Screenshot 2024-07-15 210246](https://github.com/user-attachments/assets/1f23f4cd-aa94-446e-8e9c-6384c8ef810f)
+
+
+https://github.com/user-attachments/assets/9c474889-1fd7-4afe-8b85-879b2787c54d
+
 
 ## Tech Stack
 
