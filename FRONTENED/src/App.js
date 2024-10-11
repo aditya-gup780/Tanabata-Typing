@@ -36,30 +36,16 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/Tanabata-Typing" element={<Home></Home>} />
-        </Routes>
-        <Routes>
           <Route exact path="/textarea" element={<TextArea></TextArea>} />
-        </Routes>
-        <Routes>
-          <Route exact path="/dashboard" element={<Dashboard></Dashboard>} />
-        </Routes>
-        <Routes>
+          <Route exact path="/dashboard" element={<GameMenu></GameMenu>} />
           <Route exact path="/game/create" element={<CreateGame></CreateGame>} />
-        </Routes>
-        <Routes>
           <Route exact path="/game/join" element={<JoinGame></JoinGame>} />
-        </Routes>
-        <Routes>
           <Route exact path="/game/:gameID" render={props => <Arena {...props} gameState={gameState}>} />
-        </Routes>
-        <Routes>
           <Route
             exact
             path="/Loginsignup"
             element={<Loginsignup></Loginsignup>}
           />
-        </Routes>
-        <Routes>
           <Route exact path="/leaderboard" element={<LeaderBoard></LeaderBoard>} />
         </Routes>
       </Router>
