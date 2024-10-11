@@ -46,7 +46,6 @@ function App() {
             path="/Loginsignup"
             element={<Loginsignup></Loginsignup>}
           />
-          <Route exact path="/leaderboard" element={<LeaderBoard></LeaderBoard>} />
         </Routes>
       </Router>
     </div>
