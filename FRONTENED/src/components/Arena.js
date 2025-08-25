@@ -21,7 +21,7 @@ const Arena = ({gameState}) => {
   return (
     <div className="text-center">
       <DisplayWords words={words} player={player}>
-      <ProgressBar players={palyers} player={player} wordsLength={words.length}>
+      <ProgressBar players={players} player={player} wordsLength={words.length}>
       <Form isOpen={isOpen} isOver={isOver} gameID={_id}>
       <CountDown />
       <StartBtn player={player} gameID={_id}/>
