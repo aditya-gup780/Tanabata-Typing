@@ -8,7 +8,9 @@ const PlayerSchema = new mongoose.Schema({
   socketID : {type : String},
   isPartyLeader : {type : Boolean, default : false},
   WPM : {type : Number, default : -1},
-  nickName : {type : String}
+  nickName : {type : String},
+  totalTypedChars: { type: Number, default: 0 },   
+  correctChars:   { type: Number, default: 0 }
 });
 
 const GameSchema = new mongoose.Schema({
