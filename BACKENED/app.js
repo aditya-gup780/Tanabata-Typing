@@ -12,28 +12,44 @@ const QuotableAPI = require('./QuotableAPI');
 io.connect('connect',(socket)=>{
 
   socket.on('userInput', async({userInput,gameID})=>{
-    try{
-      let game = await Game.findById(gameID);
-      if(!game.isOpen && !game.isOver){
-        let player = game.players.find(player => player.socketID === socket.id);
-        let word = game.words[player.currentWordIndex];
-        if(word === userInput){
-          player.currentWordIndex++;
-          if(player.currentWordIndex !== game.words.length){
-            game = await game.save();
-            io.to(gameID).emit('updateGame',game);
-          }
-          else{
-            let endTime = new Date().getTime();
-            let {startTime} = game;
-            player.WPM = calculateWPM(endTime,startTime,player);
-            game = await game.save();
-            socket.emit('done');
-            io.to(gameID).emit('updateGame',game);
-          }
-        }
+    try {
+  let game = await Game.findById(gameID);
+  if (!game.isOpen && !game.isOver) {
+    let player = game.players.find(p => p.socketID === socket.id);
+    let word = game.words[player.currentWordIndex];
+
+    player.totalTypedChars = (player.totalTypedChars || 0) + (userInput ? userInput.length : 0);
+
+    if (word === userInput) {
+      player.correctChars = (player.correctChars || 0) + word.length;
+
+      player.currentWordIndex++;
+
+      if (player.currentWordIndex !== game.words.length) {
+        game = await game.save();
+        io.to(gameID).emit('updateGame', game);
+      } else {
+        let endTime = new Date().getTime();
+        let { startTime } = game;
+        player.WPM = calculateWPM(endTime, startTime, player);
+
+        const accuracy = calculateAccuracy(player); 
+        player.accuracy = accuracy; 
+
+        game = await game.save();
+        socket.emit('done');
+        io.to(gameID).emit('updateGame', game);
       }
+    } else {
+      player.wrongAttempts = (player.wrongAttempts || 0) + 1;
+
+      game = await game.save();
+      io.to(gameID).emit('updateGame', game);
     }
+  }
+} catch (err) {
+  console.error(err);
+}
   })
 
   socket.on('timer', async({gameID,playerID})=>{
@@ -139,3 +155,19 @@ const calculateWPM = (endTime,startTime,player) => {
   const WPM = Math.floor(numOfWords/timeInMinutes);
   return WPM;
 }
+
+const calculateCPM = (endTime, startTime, player) => {
+  let numOfCharacters = player.currentWordIndex * 5; 
+  
+  const timeInSeconds = (endTime - startTime) / 1000;
+  const timeInMinutes = timeInSeconds / 60;
+  const CPM = Math.floor(numOfCharacters / timeInMinutes);
+  return CPM;
+};
+
+const calculateAccuracy = (player) => {
+  const { totalTypedChars = 0, correctChars = 0 } = player;
+  if (totalTypedChars === 0) return 0;
+  const acc = (correctChars / totalTypedChars) * 100;
+  return Math.floor(acc); 
+};
